@@ -60,4 +60,11 @@ describe(Human) do
       expect(Human.breed("Dachshund")).to(eq([@human, human1]))
     end
   end
+
+  describe(".find") do
+    it("finds a human by their id number") do
+      @human.save()
+      expect(Human.find(@human.id())).to(eq(@human))
+    end
+  end
 end

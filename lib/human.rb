@@ -46,4 +46,13 @@ class Human
     self.name().==(another_human.name()).&self.phone().==(another_human.phone()).&(self.animal_preference().==(another_human.animal_preference())).&(self.breed_preference().==(another_human.breed_preference())).&(self.id().==(another_human.id()))
   end
 
+  def self.find(id)
+    found_human = nil
+    Human.all.each() do |human|
+      if human.id().==(id)
+        found_human = human
+      end
+    end
+    found_human
+  end
 end
