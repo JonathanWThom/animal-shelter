@@ -61,6 +61,15 @@ describe(Animal) do
     end
   end
 
+  describe(".alphabetize") do
+    it('will return all animals in alphabetical order by name') do
+      @animal.save()
+      new_animal = Animal.new({:name => "Arnie", :gender => "Male", :date_of_admittance => "2013-05-07", :type => "Dog", :breed => "Dachshund", :human_id => 1})
+      new_animal.save()
+      expect(Animal.alphabetize()).to(eq([new_animal, @animal]))
+    end
+  end
+
   # describe(".find_by_id") do
   #   it("finds an animal by id") do
   #     @animal.save
