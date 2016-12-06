@@ -55,4 +55,19 @@ class Human
     end
     found_human
   end
+
+  def pets
+    returned_pets = DB.exec("SELECT * FROM animals WHERE human_id = #{@id};")
+    pets = []
+    returned_pets.each() do |pet|
+      name = animal.fetch("name")
+      gender = animal.fetch("gender")
+      date_of_admittance = animal.fetch("date_of_admittance")
+      type = animal.fetch("type")
+      breed = animal.fetch("breed")
+      human_id = animal.fetch("human_id").to_i()
+      pets.push(Animal.new({:name => name, :gender => gender, :date_of_admittance => date_of_admittance, :type => type, :breed => breed, :human_id => human_id}))
+    end
+    pets
+  end
 end
