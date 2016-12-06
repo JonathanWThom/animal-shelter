@@ -18,7 +18,13 @@ get('/customer') do
 end
 
 get('/worker') do
+  @humans = Human.all()
   erb(:worker)
+end
+
+get('/internal_customer/:id') do
+  @human = Human.find(params.fetch("id").to_i)
+  erb(:customer_worker)
 end
 
 post('/customer/new') do

@@ -1,0 +1,10 @@
+<h1> WELCOME TO WORK :) </h1>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+      <% @humans.each() do |human| %>
+        <li><a href="/internal_customer/<%= human.id() %>"> <%= human.name() %></a></li>
+      <% end %>
+    </div>
+  </div>
+</div>

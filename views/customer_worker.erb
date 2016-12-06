@@ -1,0 +1,13 @@
+<h1> <%= @human.name() %>'s Profile </h1>
+
+<h3> INFO </h3>
+
+<%= @human.phone() %>
+<%= @human.animal_preference() %>
+<%= @human.breed_preference() %>
+
+<ul>
+  <% @human.pets().each() do |pet| %>
+    <li><%= pet.name() %> </li>
+  <% end %>
+</ul>    
