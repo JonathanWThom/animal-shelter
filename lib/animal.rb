@@ -1,6 +1,6 @@
 class Animal
 
-  attr_reader(:name, :gender, :date_of_admittance, :type, :breed, :human_id)
+  attr_reader(:id, :name, :gender, :date_of_admittance, :type, :breed, :human_id)
 
   def initialize(attributes)
     @name = attributes.fetch(:name)
@@ -9,6 +9,7 @@ class Animal
     @type = attributes.fetch(:type)
     @breed = attributes.fetch(:breed)
     @human_id = attributes.fetch(:human_id)
+    @id = attributes.fetch(:id)
   end
 
   define_singleton_method(:all) do
@@ -21,13 +22,15 @@ class Animal
       type = animal.fetch("type")
       breed = animal.fetch("breed")
       human_id = animal.fetch("human_id").to_i()
-      animals.push(Animal.new({:name => name, :gender => gender, :date_of_admittance => date_of_admittance , :type => type, :breed => breed, :human_id => human_id }))
+      id = animal.fetch("id").to_i
+      animals.push(Animal.new({:name => name, :gender => gender, :date_of_admittance => date_of_admittance , :type => type, :breed => breed, :human_id => human_id, :id => id }))
     end
     animals
   end
 
   define_method(:save) do
-    DB.exec("INSERT INTO animals (name, gender, date_of_admittance, type, breed, human_id) VALUES ('#{@name}', '#{@gender}', '#{@date_of_admittance}', '#{@type}', '#{@breed}', #{@human_id});")
+    result = DB.exec("INSERT INTO animals (name, gender, date_of_admittance, type, breed, human_id) VALUES ('#{@name}', '#{@gender}', '#{@date_of_admittance}', '#{@type}', '#{@breed}', #{@human_id}) RETURNING id;")
+    @id = result.first.fetch("id")
   end
 
   define_method(:==) do |another_animal|
@@ -44,7 +47,8 @@ class Animal
       type = animal.fetch("type")
       breed = animal.fetch("breed")
       human_id = animal.fetch("human_id").to_i()
-      animals.push(Animal.new({:name => name, :gender => gender, :date_of_admittance => date_of_admittance , :type => type, :breed => breed, :human_id => human_id }))
+      id = animal.fetch("id").to_i
+      animals.push(Animal.new({:name => name, :gender => gender, :date_of_admittance => date_of_admittance , :type => type, :breed => breed, :human_id => human_id, :id => id }))
     end
     animals
   end
@@ -59,7 +63,8 @@ class Animal
       type = animal.fetch("type")
       breed = animal.fetch("breed")
       human_id = animal.fetch("human_id").to_i()
-      animals.push(Animal.new({:name => name, :gender => gender, :date_of_admittance => date_of_admittance , :type => type, :breed => breed, :human_id => human_id }))
+      id = animal.fetch("id").to_i
+      animals.push(Animal.new({:name => name, :gender => gender, :date_of_admittance => date_of_admittance , :type => type, :breed => breed, :human_id => human_id, :id => id }))
     end
     animals
   end
@@ -74,7 +79,8 @@ class Animal
       type = animal.fetch("type")
       breed = animal.fetch("breed")
       human_id = animal.fetch("human_id").to_i()
-      animals.push(Animal.new({:name => name, :gender => gender, :date_of_admittance => date_of_admittance , :type => type, :breed => breed, :human_id => human_id }))
+      id = animal.fetch("id").to_i
+      animals.push(Animal.new({:name => name, :gender => gender, :date_of_admittance => date_of_admittance , :type => type, :breed => breed, :human_id => human_id, :id => id }))
     end
     animals
   end

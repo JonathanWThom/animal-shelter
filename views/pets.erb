@@ -6,20 +6,27 @@
   <% if @pets.length != 0 %>
     <h5>Click a pet to view its profile</h5>
     <% @pets.each() do |pet| %>
-    <li><a href="pets/<%= pet.id() %>"><<%= pet.name() %></a></li>
+    <li><a href="pets/<%= pet.id() %>"><%= pet.name() %></a></li>
     <% end %>
-    <a href="/alphabetically">Sort Pet Names Alphabetically</a>
+</ul>
+    <a href="/alphabetically/<%= @human.id() %>">Sort Pet Names Alphabetically</a>
     <form action="/breed" method="post">
       <div class="form-group">
-        <input id="breed" name="breed" class="form-control" placeholder="Find Breed">
+        <input id="human_id" name="human_id" value="<%= @human.id() %>" type="hidden">
+        <!-- <input id="breed" name="breed" class="form-control" placeholder="Find Breed"> -->
+        <select id="breed" name="breed" class="form-control">
+          <% @pets.each do |pet| %>
+          <option><%= pet.breed() %></option>
+          <% end %>
+        </select>
       </div>
       <button type="submit" name="btn">Find!</button>
     </form>
     <form action="/type" method="post">
+      <input id="human_id" name="human_id" value="<%= @human.id() %>" type="hidden">
       <div class="form-group">
         <input id="type" name="type" class="form-control" placeholder="Find Type (Dog, Cat, Goat, etc.)">
       </div>
       <button type="submit" name="btn">Find!</button>
     </form>
   <% end %>
-</ul>

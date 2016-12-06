@@ -31,19 +31,28 @@ post('/customer/new') do
   erb(:pets)
 end
 
-get('/alphabetically') do
+get('/alphabetically/:id') do
   @pets = Animal.alphabetize()
+  @human = Human.find(params.fetch("id").to_i)
   erb(:pets)
 end
 
 post('/type') do
   type = params.fetch('type')
   @pets = Animal.type(type)
+  @human = Human.find(params.fetch("human_id"))
   erb(:pets)
 end
 
 post('/breed') do
   breed = params.fetch("breed")
   @pets = Animal.breed(breed)
+  @human = Human.find(params.fetch("human_id"))
   erb(:pets)
 end
+
+# #this needs more i thinK?
+# get('/pets/:id')
+#   @pet = Animal.new()
+#   erb(:pet)
+# end
