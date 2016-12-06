@@ -60,4 +60,11 @@ describe(Animal) do
       expect(new_animal).to(eq(@animal))
     end
   end
+
+  # describe(".find_by_id") do
+  #   it("finds an animal by id") do
+  #     @animal.save
+  #     expect(Animal.find_by_id(1)).to(eq)
+  #   end
+  # end
 end

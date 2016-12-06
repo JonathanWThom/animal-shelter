@@ -1,6 +1,6 @@
 require('rspec')
 require('animal')
-require('person')
+require('human')
 require('pg')
 require('pry')
 

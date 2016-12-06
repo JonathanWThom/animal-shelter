@@ -33,4 +33,14 @@ class Animal
   define_method(:==) do |another_animal|
     self.name().==(another_animal.name()).&(self.gender().==(another_animal.gender())).&(self.type().==(another_animal.type())).&(self.breed().==(another_animal.breed())).&(self.human_id().==(another_animal.human_id()))
   end
+  # 
+  # def self.find_by_human_id(human_id)
+  #   found_animal = nil
+  #   Animal.all.each do |animal|
+  #     if animal.human_id().==(human_id)
+  #       found_animal = animal
+  #     end
+  #   end
+  #   found_animal
+  # end
 end
