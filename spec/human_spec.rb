@@ -49,4 +49,15 @@ describe(Human) do
       expect(@human.id()).to(be_an_instance_of(Fixnum))
     end
   end
+
+  describe(".breed") do
+    it("returns humans by breed preference") do
+      @human.save()
+      human1 = Human.new(:name => "Tyler", :phone => 5555555, :animal_preference => "Dog", :breed_preference => "Dachshund", :id => nil)
+      human1.save()
+      human2 = Human.new(:name => "Pug Lover", :phone => 5555555, :animal_preference => "Dog", :breed_preference => "Pug", :id => nil)
+      human2.save
+      expect(Human.breed("Dachshund")).to(eq([@human, human1]))
+    end
+  end
 end
