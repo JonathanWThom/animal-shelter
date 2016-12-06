@@ -79,6 +79,17 @@ describe(Animal) do
     end
   end
 
+  describe(".type") do
+    it('returns all animals of a certain type') do
+      @animal.save()
+      new_animal = Animal.new({:name => "Arnie", :gender => "Male", :date_of_admittance => "2013-05-07", :type => "Dog", :breed => "Pug", :human_id => 1})
+      new_animal.save()
+      new_animal2 = Animal.new({:name => "Arnie", :gender => "Male", :date_of_admittance => "2013-05-07", :type => "Cat", :breed => "Pug", :human_id => 1})
+      new_animal2.save()
+      expect(Animal.type("Cat")).to(eq([new_animal2]))
+    end
+  end
+
   # describe(".find_by_id") do
   #   it("finds an animal by id") do
   #     @animal.save
