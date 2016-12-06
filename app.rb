@@ -30,3 +30,20 @@ post('/customer/new') do
   @pets = Animal.all()
   erb(:pets)
 end
+
+get('/alphabetically') do
+  @pets = Animal.alphabetize()
+  erb(:pets)
+end
+
+post('/type') do
+  type = params.fetch('type')
+  @pets = Animal.type(type)
+  erb(:pets)
+end
+
+post('/breed') do
+  breed = params.fetch("breed")
+  @pets = Animal.breed(breed)
+  erb(:pets)
+end

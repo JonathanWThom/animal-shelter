@@ -4,8 +4,22 @@
 
 <ul>
   <% if @pets.length != 0 %>
+    <h5>Click a pet to view its profile</h5>
     <% @pets.each() do |pet| %>
     <li><a href="pets/<%= pet.id() %>"><<%= pet.name() %></a></li>
     <% end %>
+    <a href="/alphabetically">Sort Pet Names Alphabetically</a>
+    <form action="/breed" method="post">
+      <div class="form-group">
+        <input id="breed" name="breed" class="form-control" placeholder="Find Breed">
+      </div>
+      <button type="submit" name="btn">Find!</button>
+    </form>
+    <form action="/type" method="post">
+      <div class="form-group">
+        <input id="type" name="type" class="form-control" placeholder="Find Type (Dog, Cat, Goat, etc.)">
+      </div>
+      <button type="submit" name="btn">Find!</button>
+    </form>
   <% end %>
 </ul>
