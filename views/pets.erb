@@ -6,7 +6,7 @@
   <% if @pets.length != 0 %>
     <h5>Click a pet to view its profile</h5>
     <% @pets.each() do |pet| %>
-    <li><a href="pets/<%= pet.id() %>"><%= pet.name() %></a></li>
+    <li><a href="/pets/<%= pet.id() %>"><%= pet.name() %></a></li>
     <% end %>
 </ul>
     <a href="/alphabetically/<%= @human.id() %>">Sort Pet Names Alphabetically</a>

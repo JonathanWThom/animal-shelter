@@ -2,7 +2,7 @@ require('spec_helper')
 
 describe(Animal) do
   before() do
-    @animal = Animal.new({:name => "Ernie", :gender => "Male", :date_of_admittance => "2013-05-07 00:00:00", :type => "Dog", :breed => "Dachshund", :human_id => 1})
+    @animal = Animal.new({:name => "Ernie", :gender => "Male", :date_of_admittance => "2013-05-07 00:00:00", :type => "Dog", :breed => "Dachshund", :human_id => 1, :id => nil})
   end
 
   describe(".all") do
@@ -56,7 +56,7 @@ describe(Animal) do
 
   describe("#==") do
     it('it is the same if it has the same attributes except date and human') do
-      new_animal = Animal.new({:name => "Ernie", :gender => "Male", :date_of_admittance => "2013-05-07", :type => "Dog", :breed => "Dachshund", :human_id => 1})
+      new_animal = Animal.new({:name => "Ernie", :gender => "Male", :date_of_admittance => "2013-05-07", :type => "Dog", :breed => "Dachshund", :human_id => 1, :id => nil})
       expect(new_animal).to(eq(@animal))
     end
   end
@@ -64,7 +64,7 @@ describe(Animal) do
   describe(".alphabetize") do
     it('will return all animals in alphabetical order by name') do
       @animal.save()
-      new_animal = Animal.new({:name => "Arnie", :gender => "Male", :date_of_admittance => "2013-05-07", :type => "Dog", :breed => "Dachshund", :human_id => 1})
+      new_animal = Animal.new({:name => "Arnie", :gender => "Male", :date_of_admittance => "2013-05-07", :type => "Dog", :breed => "Dachshund", :human_id => 1, :id => nil})
       new_animal.save()
       expect(Animal.alphabetize()).to(eq([new_animal, @animal]))
     end
@@ -73,7 +73,7 @@ describe(Animal) do
   describe(".breed") do
     it('returns all animals of a certain breed') do
       @animal.save()
-      new_animal = Animal.new({:name => "Arnie", :gender => "Male", :date_of_admittance => "2013-05-07", :type => "Dog", :breed => "Pug", :human_id => 1})
+      new_animal = Animal.new({:name => "Arnie", :gender => "Male", :date_of_admittance => "2013-05-07", :type => "Dog", :breed => "Pug", :human_id => 1, :id => nil})
       new_animal.save()
       expect(Animal.breed("Pug")).to(eq([new_animal]))
     end
@@ -82,9 +82,9 @@ describe(Animal) do
   describe(".type") do
     it('returns all animals of a certain type') do
       @animal.save()
-      new_animal = Animal.new({:name => "Arnie", :gender => "Male", :date_of_admittance => "2013-05-07", :type => "Dog", :breed => "Pug", :human_id => 1})
+      new_animal = Animal.new({:name => "Arnie", :gender => "Male", :date_of_admittance => "2013-05-07", :type => "Dog", :breed => "Pug", :human_id => 1, :id => nil})
       new_animal.save()
-      new_animal2 = Animal.new({:name => "Arnie", :gender => "Male", :date_of_admittance => "2013-05-07", :type => "Cat", :breed => "Pug", :human_id => 1})
+      new_animal2 = Animal.new({:name => "Arnie", :gender => "Male", :date_of_admittance => "2013-05-07", :type => "Cat", :breed => "Pug", :human_id => 1, :id => nil})
       new_animal2.save()
       expect(Animal.type("Cat")).to(eq([new_animal2]))
     end
@@ -93,11 +93,20 @@ describe(Animal) do
   describe('.chronologically') do
     it('returns all animals by longest term to shortest') do
       @animal.save()
-      new_animal = Animal.new({:name => "Arnie", :gender => "Male", :date_of_admittance => "2011-05-07", :type => "Dog", :breed => "Pug", :human_id => 1})
+      new_animal = Animal.new({:name => "Arnie", :gender => "Male", :date_of_admittance => "2011-05-07", :type => "Dog", :breed => "Pug", :human_id => 1, :id => nil})
       new_animal.save()
-      new_animal2 = Animal.new({:name => "Arnie", :gender => "Male", :date_of_admittance => "2009-05-07", :type => "Cat", :breed => "Pug", :human_id => 1})
+      new_animal2 = Animal.new({:name => "Arnie", :gender => "Male", :date_of_admittance => "2009-05-07", :type => "Cat", :breed => "Pug", :human_id => 1, :id => nil})
       new_animal2.save()
       expect(Animal.chronologically()).to(eq([new_animal2, new_animal, @animal]))
+    end
+  end
+
+  describe(".find") do
+    it("finds an animal by their id number") do
+      new_animal = Animal.new({:name => "Arnie", :gender => "Male", :date_of_admittance => "2011-05-07 00:00:00", :type => "Dog", :breed => "Pug", :human_id => 1, :id => nil})
+      new_animal.save()
+      puts new_animal
+      expect(Animal.find(new_animal.id())).to(eq(new_animal))
     end
   end
 end

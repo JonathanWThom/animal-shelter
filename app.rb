@@ -51,8 +51,8 @@ post('/breed') do
   erb(:pets)
 end
 
-# #this needs more i thinK?
-# get('/pets/:id')
-#   @pet = Animal.new()
-#   erb(:pet)
-# end
+#this needs more i thinK?
+get('/pets/:id') do
+  @pet = Animal.find("id").to_i
+  erb(:pet)
+end

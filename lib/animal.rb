@@ -30,7 +30,7 @@ class Animal
 
   define_method(:save) do
     result = DB.exec("INSERT INTO animals (name, gender, date_of_admittance, type, breed, human_id) VALUES ('#{@name}', '#{@gender}', '#{@date_of_admittance}', '#{@type}', '#{@breed}', #{@human_id}) RETURNING id;")
-    @id = result.first.fetch("id")
+    @id = result.first.fetch("id").to_i
   end
 
   define_method(:==) do |another_animal|
@@ -95,9 +95,17 @@ class Animal
       type = animal.fetch("type")
       breed = animal.fetch("breed")
       human_id = animal.fetch("human_id").to_i()
-      animals.push(Animal.new({:name => name, :gender => gender, :date_of_admittance => date_of_admittance , :type => type, :breed => breed, :human_id => human_id }))
+      id = animal.fetch("id").to_i()
+      animals.push(Animal.new({:name => name, :gender => gender, :date_of_admittance => date_of_admittance , :type => type, :breed => breed, :human_id => human_id, :id => id}))
     end
     animals
   end
 
+  define_singleton_method(:find) do |id|
+    Animal.all().each do |animal|
+      if animal.id() == id
+          return animal
+      end
+    end
+  end
 end
