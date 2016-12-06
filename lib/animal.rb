@@ -108,4 +108,15 @@ class Animal
       end
     end
   end
+
+  define_method(:update) do |attributes|
+    @name = self.name()
+    @gender = self.gender()
+    @date_of_admittance = self.date_of_admittance()
+    @type = self.type()
+    @breed = self.breed()
+    @id = self.id()
+    @human_id = attributes.fetch(:human_id)
+    DB.exec("UPDATE animals SET human_id = #{@human_id} WHERE id = #{@id};")
+  end
 end

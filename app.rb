@@ -1,5 +1,6 @@
 require('sinatra')
 require('sinatra/reloader')
+require('pry')
 also_reload('lib/**/*.rb')
 require('./lib/animal')
 require('./lib/human')
@@ -53,6 +54,15 @@ end
 
 #this needs more i thinK?
 get('/pets/:id') do
-  @pet = Animal.find("id").to_i
+  @pet = Animal.find(params.fetch("id").to_i)
   erb(:pet)
+end
+
+patch('/adopt/:id') do
+  human_id = params.fetch("id").to_i
+  @human = Human.find(human_id)
+  pet_id = params.fetch("pet_id").to_i
+  @pet = Animal.find(pet_id)
+  @pet.update({:human_id => human_id})
+  erb(:customer_personal)
 end

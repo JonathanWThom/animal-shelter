@@ -2,31 +2,47 @@
 
 <h4> Currently, we have <%= @pets.length() %> lil' buddies available for adoption</h4>
 
-<ul>
-  <% if @pets.length != 0 %>
-    <h5>Click a pet to view its profile</h5>
-    <% @pets.each() do |pet| %>
-    <li><a href="/pets/<%= pet.id() %>"><%= pet.name() %></a></li>
-    <% end %>
-</ul>
-    <a href="/alphabetically/<%= @human.id() %>">Sort Pet Names Alphabetically</a>
-    <form action="/breed" method="post">
-      <div class="form-group">
+<div class="col-sm-4">
+  <ul>
+    <% if @pets.length != 0 %>
+      <h5>Click a pet to view its profile</h5>
+      <% @pets.each() do |pet| %>
+      <li><a href="/pets/<%= pet.id() %>"><%= pet.name() %></a></li>
+      <% end %>
+  </ul>
+      <a href="/alphabetically/<%= @human.id() %>">Sort Pet Names Alphabetically</a>
+      <form action="/breed" method="post">
+        <div class="form-group">
+          <input id="human_id" name="human_id" value="<%= @human.id() %>" type="hidden">
+          <!-- <input id="breed" name="breed" class="form-control" placeholder="Find Breed"> -->
+          <select id="breed" name="breed" class="form-control">
+            <% @pets.each do |pet| %>
+            <option><%= pet.breed() %></option>
+            <% end %>
+          </select>
+        </div>
+        <button type="submit" name="btn">Find!</button>
+      </form>
+      <form action="/type" method="post">
         <input id="human_id" name="human_id" value="<%= @human.id() %>" type="hidden">
-        <!-- <input id="breed" name="breed" class="form-control" placeholder="Find Breed"> -->
-        <select id="breed" name="breed" class="form-control">
-          <% @pets.each do |pet| %>
-          <option><%= pet.breed() %></option>
-          <% end %>
-        </select>
-      </div>
-      <button type="submit" name="btn">Find!</button>
-    </form>
-    <form action="/type" method="post">
-      <input id="human_id" name="human_id" value="<%= @human.id() %>" type="hidden">
-      <div class="form-group">
-        <input id="type" name="type" class="form-control" placeholder="Find Type (Dog, Cat, Goat, etc.)">
-      </div>
-      <button type="submit" name="btn">Find!</button>
-    </form>
-  <% end %>
+        <div class="form-group">
+          <input id="type" name="type" class="form-control" placeholder="Find Type (Dog, Cat, Goat, etc.)">
+        </div>
+        <button type="submit" name="btn">Find!</button>
+      </form>
+    <% end %>
+</div>
+<div class="col-sm-4">
+  <h1>Ready to adopt? Choose a lil' buddy from below.</h1>
+  <form action="/adopt/<%= @human.id %>" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <div class="form-group">
+      <select id="name" name="pet_id" class="form-control">
+        <% @pets.each do |pet| %>
+        <option value="<%= pet.id() %>"><%= pet.name() %></option>
+        <% end %>
+      </select>
+    </div>
+    <button type="submit" name="btn">Adopt!</button>
+  </form>
+</div>

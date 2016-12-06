@@ -109,4 +109,13 @@ describe(Animal) do
       expect(Animal.find(new_animal.id())).to(eq(new_animal))
     end
   end
+
+  describe('#update') do
+    it('updates an animals human id') do
+      new_animal = Animal.new({:name => "Arnie", :gender => "Male", :date_of_admittance => "2011-05-07 00:00:00", :type => "Dog", :breed => "Pug", :human_id => 1, :id => nil})
+      new_animal.save()
+      new_animal.update({:human_id => 2})
+      expect(new_animal.human_id()).to(eq(2))
+    end
+  end
 end
