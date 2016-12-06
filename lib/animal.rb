@@ -78,14 +78,20 @@ class Animal
     end
     animals
   end
-  #
-  # def self.find_by_human_id(human_id)
-  #   found_animal = nil
-  #   Animal.all.each do |animal|
-  #     if animal.human_id().==(human_id)
-  #       found_animal = animal
-  #     end
-  #   end
-  #   found_animal
-  # end
+
+  define_singleton_method(:chronologically) do
+    returned_animals = DB.exec("SELECT * FROM animals ORDER BY date_of_admittance ASC;")
+    animals = []
+    returned_animals.each() do |animal|
+      name = animal.fetch("name")
+      gender = animal.fetch("gender")
+      date_of_admittance = animal.fetch("date_of_admittance")
+      type = animal.fetch("type")
+      breed = animal.fetch("breed")
+      human_id = animal.fetch("human_id").to_i()
+      animals.push(Animal.new({:name => name, :gender => gender, :date_of_admittance => date_of_admittance , :type => type, :breed => breed, :human_id => human_id }))
+    end
+    animals
+  end
+
 end

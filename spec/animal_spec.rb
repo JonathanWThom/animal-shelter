@@ -90,10 +90,14 @@ describe(Animal) do
     end
   end
 
-  # describe(".find_by_id") do
-  #   it("finds an animal by id") do
-  #     @animal.save
-  #     expect(Animal.find_by_id(1)).to(eq)
-  #   end
-  # end
+  describe('.chronologically') do
+    it('returns all animals by longest term to shortest') do
+      @animal.save()
+      new_animal = Animal.new({:name => "Arnie", :gender => "Male", :date_of_admittance => "2011-05-07", :type => "Dog", :breed => "Pug", :human_id => 1})
+      new_animal.save()
+      new_animal2 = Animal.new({:name => "Arnie", :gender => "Male", :date_of_admittance => "2009-05-07", :type => "Cat", :breed => "Pug", :human_id => 1})
+      new_animal2.save()
+      expect(Animal.chronologically()).to(eq([new_animal2, new_animal, @animal]))
+    end
+  end
 end
