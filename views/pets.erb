@@ -1,0 +1,11 @@
+<h1> Hello <%= @human.name() %> </h1>
+
+<h4> Currently, we have <%= @pets.length() %> lil' buddies available for adoption</h4>
+
+<ul>
+  <% if @pets.length != 0 %>
+    <% @pets.each() do |pet| %>
+    <li><a href="pets/<%= pet.id() %>"><<%= pet.name() %></a></li>
+    <% end %>
+  <% end %>
+</ul>
