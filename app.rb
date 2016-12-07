@@ -60,6 +60,12 @@ get('/alphabetically/:id') do
   erb(:pets)
 end
 
+get('/chronologically') do
+  @pets = Animal.chronologically()
+  @humans = Human.all()
+  erb(:worker)
+end
+
 post('/type') do
   type = params.fetch('type')
   @pets = Animal.type(type)
@@ -72,6 +78,13 @@ post('/breed') do
   @pets = Animal.breed(breed)
   @human = Human.find(params.fetch("human_id"))
   erb(:pets)
+end
+
+post('/breed_sort') do
+  breed = params.fetch("breed")
+  @pets = Animal.all()
+  @humans = Human.breed(breed)
+  erb(:worker)
 end
 
 #this needs more i thinK?
