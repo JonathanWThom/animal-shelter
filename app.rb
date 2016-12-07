@@ -18,6 +18,7 @@ get('/customer') do
 end
 
 get('/worker') do
+  @pets = Animal.all()
   @humans = Human.all()
   erb(:worker)
 end
@@ -25,6 +26,21 @@ end
 get('/internal_customer/:id') do
   @human = Human.find(params.fetch("id").to_i)
   erb(:customer_worker)
+end
+
+post('/add') do
+  name = params.fetch("name")
+  gender = params.fetch("gender")
+  date_of_admittance = params.fetch("date_of_admittance")
+  type = params.fetch("type")
+  breed = params.fetch("breed")
+  human_id = nil
+  id = nil
+  @pet = Animal.new({:name => name, :gender => gender, :date_of_admittance => date_of_admittance, :type => type, :breed => breed, :human_id => human_id, :id => id})
+  @pet.save()
+  @pets = Animal.all()
+  @humans = Human.all()
+  erb(:worker)
 end
 
 post('/customer/new') do

@@ -29,7 +29,7 @@ class Animal
   end
 
   define_method(:save) do
-    result = DB.exec("INSERT INTO animals (name, gender, date_of_admittance, type, breed, human_id) VALUES ('#{@name}', '#{@gender}', '#{@date_of_admittance}', '#{@type}', '#{@breed}', #{@human_id}) RETURNING id;")
+    result = DB.exec("INSERT INTO animals (name, gender, date_of_admittance, type, breed) VALUES ('#{@name}', '#{@gender}', '#{@date_of_admittance}', '#{@type}', '#{@breed}') RETURNING id;")
     @id = result.first.fetch("id").to_i
   end
 
